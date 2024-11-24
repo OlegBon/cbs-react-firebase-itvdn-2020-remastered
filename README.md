@@ -21,37 +21,55 @@
 
 1. Клонуйте сховище:
 
-   ```bash
+   ```
    git clone https://github.com/OlegBon/cbs-react-firebase-itvdn-2020-remastered.git
    cd cbs-react-firebase-itvdn-2020-remastered
    ```
 
 2. Встановіть залежності:
 
-npm install або npm i
+   ```
+   npm install
+   ```
+
+або
+
+```
+ npm i
+```
 
 3. Створіть файл .env у корені проєкту і додайте такі змінні оточення (отримайте їх із Firebase - https://console.firebase.google.com/):
 
-REACT_APP_FIREBASE_API_KEY=your-api-key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
-REACT_APP_FIREBASE_DATABASE_URL=your-database-url
-REACT_APP_FIREBASE_PROJECT_ID=your-project-id
-REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
-REACT_APP_FIREBASE_APP_ID=your-app-id
+   ```
+   REACT_APP_FIREBASE_API_KEY=your-api-key
+   REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+   REACT_APP_FIREBASE_DATABASE_URL=your-database-url
+   REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+   REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+   REACT_APP_FIREBASE_APP_ID=your-app-id
+   ```
 
 4. Запустіть проєкт:
 
-npm start або npm run start
+   ```
+   npm start
+   ```
+
+або
+
+```
+ npm run start
+```
 
 5. Відкрийте браузер і перейдіть на сторінку http://localhost:3000.
 
 ## Структура проекту
 
-src/components/ — компоненти для відображення користувацького інтерфейсу.
-src/firebase-config.js — конфігурація бази даних та ініціалізація додатків.
-src/App.js — основний компонент програми.
-src/App.css — стилі для додатка.
+- **src/components/** — компоненти для відображення користувацького інтерфейсу.
+- **src/firebase-config.js** — конфігурація бази даних та ініціалізація додатків.
+- **src/App.js** — основний компонент програми.
+- **src/App.css** — стилі для додатка.
 
 ## Як використовувати
 
@@ -64,8 +82,8 @@ src/App.css — стилі для додатка.
 
 ## Подяки
 
-Влад Тисячний - дякую за крутий вебінар (Firebase. Організація віддаленої роботи з даними - https://itvdn.com/ua/webinars/description/firebase#)
-Віталій Мазяр, Богдан Мартиненко, Олексій Татаренков - дякую за навчання, передачу знань та навичок, завдання потрібних векторів
+- Влад Тисячний - дякую за крутий вебінар (Firebase. Організація віддаленої роботи з даними - https://itvdn.com/ua/webinars/description/firebase#)
+- Віталій Мазяр, Богдан Мартиненко, Олексій Татаренков (@a-tatarenkov) - дякую за навчання, передачу знань та навичок, завдання потрібних векторів
 
 ## Ліцензія
 
