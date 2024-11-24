@@ -3,7 +3,7 @@ import "./App.css";
 import { getDatabase, ref, onValue, off } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import LogInToDB from "./components/LogInToDB/LogInToDB";
-import WorkWithDB from "./WorkWithDB/WorkWithDB";
+import WorkWithDB from "./components/WorkWithDB/WorkWithDB";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -27,16 +27,18 @@ const App = () => {
   useEffect(() => {
     const db = getDatabase(app);
     const rootRef = ref(db, "/");
-    const onValueChange = onValue(rootRef, (snapshot) => {
-      setData(snapshot.val());
+    onValue(rootRef, (snapshot) => {
+      const data = snapshot.val();
+      setData(data || {});
     });
-    return () => off(rootRef, "value", onValueChange);
+    return () => off(rootRef);
   }, []);
 
   return (
     <div>
       {hasAccount ? (
         <WorkWithDB
+          app={app}
           setHasAccount={setHasAccount}
           setEmail={setEmail}
           setPassword={setPassword}
@@ -45,6 +47,7 @@ const App = () => {
         />
       ) : (
         <LogInToDB
+          app={app}
           email={email}
           password={password}
           setHasAccount={setHasAccount}

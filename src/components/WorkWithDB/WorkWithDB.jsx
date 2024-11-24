@@ -1,9 +1,11 @@
 import "./WorkWithDB.css";
-import { getAuth, signOut } from "firebase/auth";
-import { getDatabase, ref, push, remove } from "firebase/database";
+import { getDatabase, ref, push } from "firebase/database";
 import { useState } from "react";
+import LogOutDB from "./LogOutDB/LogOutDB";
+import ClearDB from "./ClearDB/ClearDB";
 
 const WorkWithDB = ({
+  app,
   setHasAccount,
   setEmail,
   setPassword,
@@ -13,51 +15,23 @@ const WorkWithDB = ({
   const [key, setKey] = useState("");
   const [value, setValue] = useState("");
 
-  const logOut = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log("Your Are Log Out");
-        setHasAccount(false);
-        setEmail("");
-        setPassword("");
-      })
-      .catch((error) => console.error("Error Signing Out:", error));
-  };
-
   const sendData = () => {
-    if (!key) {
-      console.log("Key Cannot Be Empty!");
+    if (!key || !value) {
+      console.log("Both Key and Value Are Required!");
       return;
     }
     if (/[.#$[\]]/.test(key)) {
-      console.log(
-        "Key Contains Invalid Characters. Please Avoid '.', '#', '$', '[', Or ']'"
-      );
+      console.log("Invalid Key Characters.");
       return;
     }
-    const db = getDatabase();
+    const db = getDatabase(app);
     const dbRef = ref(db, key);
     push(dbRef, value)
       .then(() => {
-        console.log("Your Data Was Written To DB");
-        setKey("");
+        console.log("Value added successfully!");
         setValue("");
       })
-      .catch((error) => console.error("Error Writing Data:", error));
-  };
-
-  const clearDatabase = () => {
-    if (window.confirm("Are You Sure You Want To Clear The Database?")) {
-      const db = getDatabase();
-      const rootRef = ref(db, "/");
-      remove(rootRef)
-        .then(() => {
-          console.log("Database Has Been Cleared!");
-          setData({});
-        })
-        .catch((error) => console.error("Error Clearing Database:", error));
-    }
+      .catch((error) => console.error("Error adding value:", error));
   };
 
   const renderData = (data) => {
@@ -84,8 +58,12 @@ const WorkWithDB = ({
 
   return (
     <div className="Work-With-DB">
-      <button onClick={logOut}>Logout</button>
-      <br />
+      <LogOutDB
+        app={app}
+        setHasAccount={setHasAccount}
+        setEmail={setEmail}
+        setPassword={setPassword}
+      />
       <input
         type="text"
         id="key"
@@ -100,8 +78,8 @@ const WorkWithDB = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button onClick={sendData}>Send Data</button>
-      <button onClick={clearDatabase}>Clear Database</button>
+      <button onClick={sendData}>Add Value</button>
+      <ClearDB app={app} setData={setData} />
       <div>
         <h3>Database Content:</h3>
         {renderData(data)}
