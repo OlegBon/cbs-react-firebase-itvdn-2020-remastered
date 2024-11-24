@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut, // Импортируем signOut для разлогинивания
-} from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import {
   getDatabase,
   ref,
@@ -14,6 +9,21 @@ import {
   push,
   remove,
 } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import LogInToDB from "./components/LogInToDB/LogInToDB";
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+};
+
+const app = initializeApp(firebaseConfig);
+// console.log(app); // Перевіряємо app
 
 const App = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +34,7 @@ const App = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    const db = getDatabase();
+    const db = getDatabase(app);
     const rootRef = ref(db, "/");
     const onValueChange = onValue(rootRef, (snapshot) => {
       setData(snapshot.val());
@@ -33,40 +43,27 @@ const App = () => {
     return () => off(rootRef, "value", onValueChange);
   }, []);
 
-  const createAccount = () => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => setHasAccount(true))
-      .catch((error) => console.error("Error creating account:", error));
-  };
-
-  const signIn = () => {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => setHasAccount(true))
-      .catch((error) => console.error("Error signing in:", error));
-  };
-
   const logOut = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        setHasAccount(false); // Сброс состояния, когда пользователь разлогинен
-        setEmail(""); // Очистка полей ввода
+        console.log("Your Are Log Out");
+        setHasAccount(false);
+        setEmail("");
         setPassword("");
       })
-      .catch((error) => console.error("Error signing out:", error));
+      .catch((error) => console.error("Error Signing Out:", error));
   };
 
   const sendData = () => {
     if (!key) {
-      console.log("Key cannot be empty!");
+      console.log("Key Cannot Be Empty!");
       return;
     }
 
     if (/[.#$[\]]/.test(key)) {
       console.log(
-        "Key contains invalid characters. Please avoid '.', '#', '$', '[', or ']'"
+        "Key Contains Invalid Characters. Please Avoid '.', '#', '$', '[', Or ']'"
       );
       return;
     }
@@ -75,23 +72,23 @@ const App = () => {
     const dbRef = ref(db, key);
     push(dbRef, value)
       .then(() => {
-        console.log("Your data was written to DB");
+        console.log("Your Data Was Written To DB");
         setKey("");
         setValue("");
       })
-      .catch((error) => console.error("Error writing data:", error));
+      .catch((error) => console.error("Error Writing Data:", error));
   };
 
   const clearDatabase = () => {
-    if (window.confirm("Are you sure you want to clear the database?")) {
+    if (window.confirm("Are You Sure You Want To Clear The Database?")) {
       const db = getDatabase();
       const rootRef = ref(db, "/");
       remove(rootRef)
         .then(() => {
-          console.log("Database has been cleared!");
+          console.log("Database Has Been Cleared!");
           setData({});
         })
-        .catch((error) => console.error("Error clearing database:", error));
+        .catch((error) => console.error("Error Clearing Database:", error));
     }
   };
 
@@ -147,24 +144,13 @@ const App = () => {
           </div>
         </div>
       ) : (
-        <div className="login_block">
-          <input
-            type="text"
-            id="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={signIn}>Sign In</button>
-          <button onClick={createAccount}>Create Account</button>
-        </div>
+        <LogInToDB
+          email={email}
+          password={password}
+          setHasAccount={setHasAccount}
+          setEmail={setEmail}
+          setPassword={setPassword}
+        />
       )}
     </div>
   );
