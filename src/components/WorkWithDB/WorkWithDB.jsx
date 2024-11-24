@@ -3,6 +3,7 @@ import { getDatabase, ref, push } from "firebase/database";
 import { useState } from "react";
 import LogOutDB from "./LogOutDB/LogOutDB";
 import ClearDB from "./ClearDB/ClearDB";
+import GetDataFromDB from "./GetDataFromDB/GetDataFromDB";
 
 const WorkWithDB = ({
   app,
@@ -34,28 +35,6 @@ const WorkWithDB = ({
       .catch((error) => console.error("Error adding value:", error));
   };
 
-  const renderData = (data) => {
-    if (!data || Object.keys(data).length === 0)
-      return <p>No data available.</p>;
-    const renderNode = (node, path = "") => {
-      if (typeof node === "object") {
-        return (
-          <ul>
-            {Object.keys(node).map((key) => (
-              <li key={path + key}>
-                <strong>{key}:</strong>
-                {renderNode(node[key], path + key + "/")}
-              </li>
-            ))}
-          </ul>
-        );
-      } else {
-        return <span> {node}</span>;
-      }
-    };
-    return renderNode(data);
-  };
-
   return (
     <div className="Work-With-DB">
       <LogOutDB
@@ -80,10 +59,7 @@ const WorkWithDB = ({
       />
       <button onClick={sendData}>Add Value</button>
       <ClearDB app={app} setData={setData} />
-      <div>
-        <h3>Database Content:</h3>
-        {renderData(data)}
-      </div>
+      <GetDataFromDB data={data} />
     </div>
   );
 };
