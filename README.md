@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# CBS React Firebase ITVDN 2020 Remastered
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Це проєкт, створений у рамках вебінару ITVDN (Firebase. Організація віддаленої роботи з даними - https://itvdn.com/ua/webinars/description/firebase#), який використовує React і Firebase для створення веб-додатку. У проєкті реалізовано базові операції з базою даних Firebase, як-от читання і запис даних, а також авторизація.
 
-## Available Scripts
+## Опис
 
-In the project directory, you can run:
+Цей проєкт являє собою застосунок, у якому користувачі можуть авторизуватися через Firebase і взаємодіяти з базою даних. Додаток дає змогу:
 
-### `npm start`
+- Створити акаунт для роботи з Firebase.
+- Авторизуватися через Firebase (якщо вже є акаунт).
+- Працювати з даними в реальному часі (з використанням Firebase Realtime Database).
+- Зберігати і відображати дані, пов'язані з користувачами або іншими сутностями.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Технології
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React** — для побудови користувацького інтерфейсу.
+- **Firebase** — для аутентифікації користувачів і роботи з базою даних.
+- **React Hooks** — для управління станом компонента.
 
-### `npm test`
+## Установка
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Клонуйте сховище:
 
-### `npm run build`
+   ```bash
+   git clone https://github.com/OlegBon/cbs-react-firebase-itvdn-2020-remastered.git
+   cd cbs-react-firebase-itvdn-2020-remastered
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Встановіть залежності:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm install або npm i
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Створіть файл .env у корені проєкту і додайте такі змінні оточення (отримайте їх із Firebase - https://console.firebase.google.com/):
 
-### `npm run eject`
+REACT_APP_FIREBASE_API_KEY=your-api-key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+REACT_APP_FIREBASE_DATABASE_URL=your-database-url
+REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+REACT_APP_FIREBASE_APP_ID=your-app-id
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Запустіть проєкт:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm start або npm run start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. Відкрийте браузер і перейдіть на сторінку http://localhost:3000.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Структура проекту
 
-## Learn More
+src/components/ — компоненти для відображення користувацького інтерфейсу.
+src/firebase-config.js — конфігурація бази даних та ініціалізація додатків.
+src/App.js — основний компонент програми.
+src/App.css — стилі для додатка.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Як використовувати
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Під час першого запуску програми ви можете створити акаунт або увійти в систему з використанням Firebase Authentication.
+Після авторизації відкриється інтерфейс для роботи з даними з Firebase Realtime Database.
 
-### Code Splitting
+## Вклад
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Якщо у вас є ідеї для поліпшення проекту, будь ласка, створіть pull request або відкрийте issue.
 
-### Analyzing the Bundle Size
+## Подяки
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Влад Тисячний - дякую за крутий вебінар (Firebase. Організація віддаленої роботи з даними - https://itvdn.com/ua/webinars/description/firebase#)
+Віталій Мазяр, Богдан Мартиненко, Олексій Татаренков - дякую за навчання, передачу знань та навичок, завдання потрібних векторів
 
-### Making a Progressive Web App
+## Ліцензія
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Цей проєкт ліцензується на умовах ліцензії MIT. Докладніше див. у файлі LICENSE.
