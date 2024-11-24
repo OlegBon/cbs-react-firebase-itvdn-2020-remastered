@@ -1,11 +1,11 @@
-import { getDatabase, ref, remove } from "firebase/database";
+import { ref, remove } from "firebase/database";
 import "./ClearDB.css";
+import { database } from "../../../firebase-config";
 
-const ClearDB = ({ app, setData }) => {
+const ClearDB = ({ setData }) => {
   const clearDatabase = () => {
     if (window.confirm("Are You Sure You Want To Clear The Database?")) {
-      const db = getDatabase(app);
-      const rootRef = ref(db, "/");
+      const rootRef = ref(database, "/");
       remove(rootRef)
         .then(() => {
           console.log("Database Has Been Cleared!");

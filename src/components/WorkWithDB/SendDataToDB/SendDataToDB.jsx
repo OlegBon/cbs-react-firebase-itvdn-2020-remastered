@@ -1,8 +1,9 @@
 import "./SendDataToDB.css";
-import { getDatabase, ref, push } from "firebase/database";
+import { ref, push } from "firebase/database";
 import { useState } from "react";
+import { database } from "../../../firebase-config";
 
-const SendDataToDB = ({ app }) => {
+const SendDataToDB = () => {
   const [key, setKey] = useState("");
   const [value, setValue] = useState("");
 
@@ -15,8 +16,7 @@ const SendDataToDB = ({ app }) => {
       console.log("Invalid Key Characters.");
       return;
     }
-    const db = getDatabase(app);
-    const dbRef = ref(db, key);
+    const dbRef = ref(database, key);
     push(dbRef, value)
       .then(() => {
         console.log("Value added successfully!");

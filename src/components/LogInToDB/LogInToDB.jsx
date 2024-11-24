@@ -1,3 +1,4 @@
+import { auth } from "../../firebase-config";
 import "./LogInToDB.css";
 import {
   getAuth,
@@ -6,7 +7,6 @@ import {
 } from "firebase/auth";
 
 const LogInToDB = ({
-  app,
   email,
   password,
   setHasAccount,
@@ -15,23 +15,22 @@ const LogInToDB = ({
 }) => {
   const signIn = () => {
     if (!email || !password) {
-      console.log("Email and Password are required!");
+      console.log("Email And Password Are Required!");
       return;
     }
-    const auth = getAuth(app); // Передаём app
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log("Successfully signed in!");
+        console.log("Successfully Signed In!");
         setHasAccount(true);
       })
-      .catch((error) => console.error("Error signing in:", error));
+      .catch((error) => console.error("Error Signing In:", error));
   };
 
   const createAccount = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log("Your Are Create Account");
+        console.log("Successfully Created Account");
         setHasAccount(true);
       })
       .catch((error) => console.error("Error Creating Account:", error));

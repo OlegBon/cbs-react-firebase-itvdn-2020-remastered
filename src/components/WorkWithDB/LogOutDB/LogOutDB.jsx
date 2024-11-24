@@ -1,12 +1,12 @@
+import { auth } from "../../../firebase-config";
 import "./LogOutDB.css";
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
-const LogOutDB = ({ app, setHasAccount, setEmail, setPassword }) => {
+const LogOutDB = ({ setHasAccount, setEmail, setPassword }) => {
   const logOut = () => {
-    const auth = getAuth(app);
     signOut(auth)
       .then(() => {
-        console.log("You Are Logged Out");
+        console.log("Successfully Logged Out");
         setHasAccount(false);
         setEmail("");
         setPassword("");
