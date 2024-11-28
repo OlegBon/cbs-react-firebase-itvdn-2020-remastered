@@ -50,7 +50,7 @@
    REACT_APP_FIREBASE_APP_ID=your-app-id
    ```
 
-   \*\*Примітка. Якщо з firebase при перегляді версіі чи init, чи ще з якоюсь командою отримаємо помилку:
+   **Примітка.** Якщо з firebase при перегляді версіі чи init, чи ще з якоюсь командою отримаємо помилку:
 
    ```
    firebase : The term 'firebase' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
