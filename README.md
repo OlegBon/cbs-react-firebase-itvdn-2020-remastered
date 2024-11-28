@@ -94,6 +94,8 @@
    Set-ExecutionPolicy -Scope Process -ExecutionPolicy Restricted
    ```
 
+   **Альтернатива: Використовуємо cmd замість PowerShell**
+
 4. Запустіть проєкт:
 
    ```
