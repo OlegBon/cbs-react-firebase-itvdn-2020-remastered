@@ -50,6 +50,50 @@
    REACT_APP_FIREBASE_APP_ID=your-app-id
    ```
 
+   \*\*Примітка. Якщо з firebase при перегляді версіі чи init, чи ще з якоюсь командою отримаємо помилку:
+
+   ```
+   firebase : The term 'firebase' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+   At line:1 char:1
+   + firebase init
+   + ~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (firebase:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+   ```
+
+   Треба перевірити поточну політику виконання. Зазвичай її встановлено в Restricted, що забороняє запуск будь-яких скриптів.
+
+   ```
+   Get-ExecutionPolicy
+   ```
+
+   Тимчасово дозволити виконання скриптів
+
+   ```
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+   ```
+
+   Якщо потрібно дозволити постійно
+
+   ```
+   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+   ```
+
+   Далі робимо що нап потрібно. Дивимось версію, встановлюємо Firebase CLI, підключаємось до аккаунту,
+
+   ```
+   firebase --version
+   npm install -g firebase-tools
+   firebase login
+   firebase init
+   ```
+
+   Та потім повертаємо політику виконання в початковий стан, щоб система залишалася захищеною
+
+   ```
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Restricted
+   ```
+
 4. Запустіть проєкт:
 
    ```
